@@ -1,4 +1,1 @@
 package service
-
-func test() {
-}
