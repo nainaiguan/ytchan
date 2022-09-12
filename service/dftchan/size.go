@@ -1,7 +1,7 @@
 package dftchan
 
 func (d *DftChan) Size() int {
-	return 0
+	return len(d.data)
 }
 
 func (d *DftChan) Capacity() int {

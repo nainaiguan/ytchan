@@ -6,7 +6,7 @@ type Dftchan interface {
 	// Send send a message to the chan
 	Send(message interface{}) error
 	// Pull pull a message from the top of the chan
-	Pull(size int) ([]interface{}, error)
+	Pull(size int) []interface{}
 	// Size get the size of the chan
 	Size() int
 	// Capacity get the max size of the chan

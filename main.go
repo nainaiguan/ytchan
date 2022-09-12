@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	//ch, shut := dftchan.Default()
+	//ch, _ := dftchan.Default()
 }
