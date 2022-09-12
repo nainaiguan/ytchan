@@ -1,0 +1,126 @@
+package dftchan
+
+import (
+	"context"
+	"sync"
+	"time"
+)
+
+type DftChan struct {
+	data           chan interface{}
+	cap            int
+	maxSendProcess int
+	sendHistory    history
+	sendProcess    sendProcess
+	pullProcess    pullProcess
+	cleanFlag      cleanFlag
+	closeFlag      closeFlag
+	ctx            context.Context
+}
+
+func (d *DftChan) DftChanCleanDaemon() {
+	for {
+		select {
+		case <-d.ctx.Done():
+			return
+		default:
+			d.cleanFlag.Clean()
+			l := len(d.sendHistory.h)
+			tmp := make([]interface{}, l)
+			copy(tmp, d.sendHistory.h)
+			d.sendHistory.h = tmp
+			d.cleanFlag.Done()
+			time.Sleep(30 * time.Second)
+		}
+	}
+}
+
+type cleanFlag struct {
+	m sync.RWMutex
+}
+
+func (c *cleanFlag) Load() {
+	c.m.RLock()
+}
+
+func (c *cleanFlag) Free() {
+	c.m.RUnlock()
+}
+
+func (c *cleanFlag) Clean() {
+	c.m.Lock()
+}
+
+func (c *cleanFlag) Done() {
+	c.m.Unlock()
+}
+
+type closeFlag struct {
+	flag int
+	m    sync.RWMutex
+}
+
+func (c *closeFlag) Load() int {
+	c.m.RLock()
+	ret := c.flag
+	c.m.RUnlock()
+	return ret
+}
+
+func (c *closeFlag) Close() {
+	c.m.Lock()
+	c.flag = 1
+	c.m.Unlock()
+}
+
+type sendProcess struct {
+	num int
+	m   sync.RWMutex
+}
+
+func (p *sendProcess) Load() int {
+	p.m.RLock()
+	ret := p.num
+	p.m.RUnlock()
+	return ret
+}
+
+func (p *sendProcess) Add() {
+	p.m.Lock()
+	p.num++
+	p.m.Unlock()
+}
+
+func (p *sendProcess) Done() {
+	p.m.Lock()
+	p.num--
+	p.m.Unlock()
+}
+
+type pullProcess struct {
+	num int
+	m   sync.Mutex
+}
+
+func (p *pullProcess) Add() {
+	p.m.Lock()
+	p.num++
+	p.m.Unlock()
+}
+
+func (p *pullProcess) Done() {
+	p.m.Lock()
+	p.num--
+	p.m.Unlock()
+}
+
+type history struct {
+	h []interface{}
+	m sync.Mutex
+}
+
+func (h *history) Add(message interface{}) {
+	h.m.Lock()
+	h.h = append(h.h, message)
+	h.m.Unlock()
+}
