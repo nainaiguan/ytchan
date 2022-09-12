@@ -9,7 +9,7 @@ func Default() (*DftChan, context.CancelFunc) {
 		cap:            1024,
 		maxSendProcess: 1024,
 		sendHistory: history{
-			h: make([]interface{}, 1024),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,

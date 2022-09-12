@@ -5,5 +5,5 @@ func (d *DftChan) Size() int {
 }
 
 func (d *DftChan) Capacity() int {
-	return 0
+	return d.cap
 }

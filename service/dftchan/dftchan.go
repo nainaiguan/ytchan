@@ -116,7 +116,14 @@ func (p *pullProcess) Done() {
 
 type history struct {
 	h []interface{}
-	m sync.Mutex
+	m sync.RWMutex
+}
+
+func (h *history) Load() []interface{} {
+	h.m.RLock()
+	ret := h.h
+	h.m.RUnlock()
+	return ret
 }
 
 func (h *history) Add(message interface{}) {

@@ -18,8 +18,8 @@ func (d *DftChan) Send(message interface{}) error {
 		return err
 	}
 
-	if d.cap <= len(d.data) {
-		prettylog.Infof("out of the chan's range")
+	if d.cap <= d.Size() {
+		prettylog.Infof("out of the chan range")
 		return nil
 	}
 

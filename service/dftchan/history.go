@@ -1,5 +1,5 @@
 package dftchan
 
 func (d *DftChan) History() []interface{} {
-	return nil
+	return d.sendHistory.Load()
 }
