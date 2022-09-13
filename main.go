@@ -24,7 +24,7 @@ func main() {
 	ch.Send("4")
 	ch.Send("5")
 
-	time.Sleep(50 * time.Second)
+	time.Sleep(5 * time.Second)
 
 	ch.Close(shut)
 }
