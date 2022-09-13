@@ -3,14 +3,14 @@ package subchan
 import (
 	"context"
 	"sync"
-	"time"
+	"ytChan/util/prettylog"
 )
 
 type SubChan struct {
 	data           chan interface{}
 	cap            int
 	maxSendProcess int
-	subscriber     map[string]chan interface{}
+	subscriber     subscriber
 	sendHistory    history
 	sendProcess    sendProcess
 	cleanFlag      cleanFlag
@@ -18,40 +18,42 @@ type SubChan struct {
 	ctx            context.Context
 }
 
-func (d *SubChan) Reconcile() {
-	for {
-		select {
-		case <-d.ctx.Done():
-			return
-		default:
-			time.Sleep(100 * time.Millisecond)
-
-			if len(d.data) != 0 {
-				message := <-d.data
-				for _, c := range d.subscriber {
-					c <- message
-				}
-			}
-		}
-	}
+type subscriber struct {
+	m  map[string]chan interface{}
+	mu sync.RWMutex
 }
 
-func (d *SubChan) DftChanCleanDaemon() {
-	for {
-		select {
-		case <-d.ctx.Done():
-			return
-		default:
-			d.cleanFlag.Clean()
-			l := len(d.sendHistory.h)
-			tmp := make([]interface{}, l)
-			copy(tmp, d.sendHistory.h)
-			d.sendHistory.h = tmp
-			d.cleanFlag.Done()
-
-			time.Sleep(30 * time.Second)
-		}
+func (s *subscriber) Load(name string) chan interface{} {
+	s.mu.RLock()
+	if _, ok := s.m[name]; !ok {
+		prettylog.Errorf("subscriber.Load Error: %s", "no such subscriber")
+		s.mu.RUnlock()
+		return nil
 	}
+	t := s.m[name]
+	s.mu.RUnlock()
+	return t
+}
+
+func (s *subscriber) Add(name string, size int) {
+	if s.Load(name) == nil {
+		prettylog.Errorf("subscriber.Add Error: %s", "duplicate subscriber")
+		return
+	}
+	s.mu.Lock()
+	m := make(chan interface{}, size)
+	s.m[name] = m
+	s.mu.Unlock()
+}
+
+func (s *subscriber) Drop(name string) {
+	if s.Load(name) == nil {
+		prettylog.Errorf("subscriber.Drop Error: %s", "no such subscriber")
+		return
+	}
+	s.mu.Lock()
+	delete(s.m, name)
+	s.mu.Unlock()
 }
 
 type cleanFlag struct {

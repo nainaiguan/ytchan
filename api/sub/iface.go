@@ -6,7 +6,7 @@ type Subchan interface {
 	// Send send a message to the chan
 	Send(message interface{}) error
 	// Subscribe subscribe the chan and get the latest message when there's something new
-	Subscribe(Name string) chan interface{}
+	Subscribe(Name string, size int) chan interface{}
 	// Unsubscribe unsubscribe the chan and you will not get the message from this chan
 	Unsubscribe(Name string)
 	// Size get the size of the chan
