@@ -3,19 +3,28 @@ package main
 import (
 	"fmt"
 	"time"
-	dftchan2 "ytChan/dftchan"
+	"ytChan/subchan"
 )
 
 func main() {
-	ch, shut := dftchan2.Default()
+	ch, shut := subchan.Default()
 
-	for i := 0; i < 102; i++ {
-		ch.Send(1)
-		ch.Send(1)
-		fmt.Println(ch.Pull(1))
-	}
+	c := ch.Subscribe("cyt", 1024)
 
-	time.Sleep(40 * time.Second)
-	fmt.Println(cap(ch.History()))
+	go func() {
+		for {
+			x := <-c
+			fmt.Println(x)
+		}
+	}()
+
+	ch.Send("1")
+	ch.Send("2")
+	ch.Send("3")
+	ch.Send("4")
+	ch.Send("5")
+
+	time.Sleep(50 * time.Second)
+
 	ch.Close(shut)
 }

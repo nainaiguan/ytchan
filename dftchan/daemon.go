@@ -2,7 +2,7 @@ package dftchan
 
 import "time"
 
-func (d *DftChan) DftChanCleanDaemon() {
+func (d *DftChan) dftChanCleanDaemon() {
 	for {
 		select {
 		case <-d.ctx.Done():

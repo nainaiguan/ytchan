@@ -26,7 +26,7 @@ func Default() (*DftChan, context.CancelFunc) {
 		},
 		ctx: ctx,
 	}
-	go ret.DftChanCleanDaemon()
+	go ret.dftChanCleanDaemon()
 	return ret, shut
 }
 
@@ -51,6 +51,6 @@ func New(args dft.NewDftArgs) (*DftChan, context.CancelFunc) {
 		},
 		ctx: ctx,
 	}
-	go ret.DftChanCleanDaemon()
+	go ret.dftChanCleanDaemon()
 	return ret, shut
 }

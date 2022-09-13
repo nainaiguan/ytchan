@@ -2,17 +2,15 @@ package subchan
 
 import "time"
 
-func (d *SubChan) Reconcile() {
+func (d *SubChan) reconcile() {
 	for {
 		select {
 		case <-d.ctx.Done():
 			return
 		default:
-			time.Sleep(100 * time.Millisecond)
-
 			if len(d.data) != 0 {
 				message := <-d.data
-				for _, c := range d.subscriber {
+				for _, c := range d.subscriber.m {
 					c <- message
 				}
 			}
@@ -20,7 +18,7 @@ func (d *SubChan) Reconcile() {
 	}
 }
 
-func (d *SubChan) SubChanCleanDaemon() {
+func (d *SubChan) subChanCleanDaemon() {
 	for {
 		select {
 		case <-d.ctx.Done():

@@ -26,7 +26,6 @@ type subscriber struct {
 func (s *subscriber) Load(name string) chan interface{} {
 	s.mu.RLock()
 	if _, ok := s.m[name]; !ok {
-		prettylog.Errorf("subscriber.Load Error: %s", "no such subscriber")
 		s.mu.RUnlock()
 		return nil
 	}
@@ -36,7 +35,7 @@ func (s *subscriber) Load(name string) chan interface{} {
 }
 
 func (s *subscriber) Add(name string, size int) {
-	if s.Load(name) == nil {
+	if s.Load(name) != nil {
 		prettylog.Errorf("subscriber.Add Error: %s", "duplicate subscriber")
 		return
 	}
