@@ -115,8 +115,9 @@ func (p *pullProcess) Done() {
 }
 
 type history struct {
-	h []interface{}
-	m sync.RWMutex
+	max int
+	h   []interface{}
+	m   sync.RWMutex
 }
 
 func (h *history) Load() []interface{} {
@@ -128,6 +129,11 @@ func (h *history) Load() []interface{} {
 
 func (h *history) Add(message interface{}) {
 	h.m.Lock()
+	if len(h.h) >= h.max {
+		t := append(h.h[1:], message)
+		h.h = t
+		return
+	}
 	h.h = append(h.h, message)
 	h.m.Unlock()
 }

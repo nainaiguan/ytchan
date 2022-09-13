@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"time"
-	"ytChan/service/dftchan"
+	dftchan2 "ytChan/dftchan"
 )
 
 func main() {
-	ch, shut := dftchan.Default()
+	ch, shut := dftchan2.Default()
 
 	for i := 0; i < 102; i++ {
 		ch.Send(1)
