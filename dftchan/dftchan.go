@@ -113,7 +113,9 @@ func (h *history) Add(message interface{}) {
 	h.m.Lock()
 	if len(h.h) >= h.max {
 		t := append(h.h[1:], message)
-		h.h = t
+		tt := make([]interface{}, len(t))
+		copy(tt, t)
+		h.h = tt
 		return
 	}
 	h.h = append(h.h, message)

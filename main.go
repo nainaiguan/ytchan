@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 	"ytChan/subchan"
 )
@@ -11,6 +12,14 @@ func main() {
 
 	c := ch.Subscribe("cyt", 1024)
 
+	for i := 0; i < 10; i++ {
+		go func(x int) {
+			_ = ch.Subscribe(strconv.Itoa(x), 1024)
+		}(i)
+		go func() {
+			ch.Send("1")
+		}()
+	}
 	go func() {
 		for {
 			x := <-c

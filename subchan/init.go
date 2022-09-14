@@ -29,7 +29,6 @@ func Default() (*SubChan, context.CancelFunc) {
 	}
 
 	go ret.subChanCleanDaemon()
-	go ret.reconcile()
 
 	return ret, shut
 }
@@ -58,7 +57,6 @@ func New(args sub.NewSubArgs) (*SubChan, context.CancelFunc) {
 	}
 
 	go ret.subChanCleanDaemon()
-	go ret.reconcile()
 
 	return ret, shut
 }

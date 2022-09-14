@@ -1,11 +1,11 @@
-package subchan
+package slowchan
 
 import (
 	"errors"
 	"ytChan/util/prettylog"
 )
 
-func (d *SubChan) Send(message interface{}) error {
+func (d *SlowChan) Send(message interface{}) error {
 	if d.closeFlag.Load() == 1 {
 		err := errors.New("the chan is already closed")
 		prettylog.Errorf("SubChan.Send Error, err: %s", err)
@@ -29,9 +29,6 @@ func (d *SubChan) Send(message interface{}) error {
 	d.sendProcess.Add()
 	d.data <- message
 	d.sendHistory.Add(message)
-	for _, c := range d.subscriber.m {
-		c <- message
-	}
 	d.sendProcess.Done()
 
 	return nil

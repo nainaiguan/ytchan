@@ -1,58 +1,21 @@
-package subchan
+package slowchan
 
 import (
 	"context"
 	"sync"
-	"ytChan/util/prettylog"
+	"time"
 )
 
-type SubChan struct {
+type SlowChan struct {
 	data           chan interface{}
 	cap            int
+	step           time.Duration
 	maxSendProcess int
-	subscriber     subscriber
 	sendHistory    history
 	sendProcess    sendProcess
 	cleanFlag      cleanFlag
 	closeFlag      closeFlag
 	ctx            context.Context
-}
-
-type subscriber struct {
-	m  map[string]chan interface{}
-	mu sync.RWMutex
-}
-
-func (s *subscriber) Load(name string) chan interface{} {
-	s.mu.RLock()
-	if _, ok := s.m[name]; !ok {
-		s.mu.RUnlock()
-		return nil
-	}
-	t := s.m[name]
-	s.mu.RUnlock()
-	return t
-}
-
-func (s *subscriber) Add(name string, size int) {
-	if s.Load(name) != nil {
-		prettylog.Errorf("subscriber.Add Error: %s", "duplicate subscriber")
-		return
-	}
-	s.mu.Lock()
-	m := make(chan interface{}, size)
-	s.m[name] = m
-	s.mu.Unlock()
-}
-
-func (s *subscriber) Drop(name string) {
-	if s.Load(name) == nil {
-		prettylog.Errorf("subscriber.Drop Error: %s", "no such subscriber")
-		return
-	}
-	s.mu.Lock()
-	delete(s.m, name)
-	s.mu.Unlock()
 }
 
 type cleanFlag struct {

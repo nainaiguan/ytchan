@@ -1,8 +1,8 @@
-package subchan
+package slowchan
 
 import "time"
 
-func (d *SubChan) subChanCleanDaemon() {
+func (d *SlowChan) slowChanCleanDaemon() {
 	for {
 		select {
 		case <-d.ctx.Done():
@@ -14,7 +14,6 @@ func (d *SubChan) subChanCleanDaemon() {
 			copy(tmp, d.sendHistory.h)
 			d.sendHistory.h = tmp
 			d.cleanFlag.Done()
-
 			time.Sleep(30 * time.Second)
 		}
 	}
