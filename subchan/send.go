@@ -30,7 +30,7 @@ func (d *SubChan) Send(message interface{}) error {
 	d.data <- message
 	d.sendHistory.Add(message)
 	for _, c := range d.subscriber.m {
-		c <- message
+		c <- <-d.data
 	}
 	d.sendProcess.Done()
 
