@@ -4,11 +4,15 @@ import (
 	"fmt"
 	"sync"
 	"time"
+	"ytChan/api/sub"
 	"ytChan/subchan"
 )
 
 func main() {
-	ch, shut := subchan.Default()
+	ch, shut := subchan.New(sub.NewSubArgs{
+		Size:           10000,
+		MaxSendProcess: 10000,
+	})
 
 	c := ch.Subscribe("cyt", 1024)
 
@@ -20,12 +24,16 @@ func main() {
 	}()
 
 	cond := sync.NewCond(&sync.Mutex{})
-	for i := 0; i < 1020; i++ {
+	for i := 0; i < 10000; i++ {
 		go func(i int) {
 			cond.L.Lock()
 			cond.Wait()
-			ch.Send(i)
 			cond.L.Unlock()
+			err := ch.Send(i)
+			if err != nil {
+				fmt.Println(err.Error())
+				return
+			}
 		}(i)
 	}
 

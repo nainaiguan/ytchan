@@ -14,8 +14,7 @@ func Default() (*SlowChan, context.CancelFunc) {
 		step:           1 * time.Second,
 		maxSendProcess: 1024,
 		sendHistory: history{
-			max: 1024,
-			h:   make([]interface{}, 0),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,
@@ -38,8 +37,7 @@ func New(args slow.NewSlowArgs) (*SlowChan, context.CancelFunc) {
 		step:           args.Step,
 		maxSendProcess: args.MaxSendProcess,
 		sendHistory: history{
-			max: args.MaxHistory,
-			h:   make([]interface{}, 0),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,

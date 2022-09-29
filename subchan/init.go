@@ -16,8 +16,7 @@ func Default() (*SubChan, context.CancelFunc) {
 			m: m,
 		},
 		sendHistory: history{
-			max: 1024,
-			h:   make([]interface{}, 0),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,
@@ -44,8 +43,7 @@ func New(args sub.NewSubArgs) (*SubChan, context.CancelFunc) {
 			m: m,
 		},
 		sendHistory: history{
-			max: args.MaxHistory,
-			h:   make([]interface{}, 0),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,

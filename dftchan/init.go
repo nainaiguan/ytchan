@@ -12,8 +12,7 @@ func Default() (*DftChan, context.CancelFunc) {
 		cap:            1024,
 		maxSendProcess: 1024,
 		sendHistory: history{
-			max: 1024,
-			h:   make([]interface{}, 0),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,
@@ -37,8 +36,7 @@ func New(args dft.NewDftArgs) (*DftChan, context.CancelFunc) {
 		cap:            args.Size,
 		maxSendProcess: args.MaxSendProcess,
 		sendHistory: history{
-			max: args.MaxHistory,
-			h:   make([]interface{}, 0),
+			h: make([]interface{}, 0),
 		},
 		sendProcess: sendProcess{
 			num: 0,

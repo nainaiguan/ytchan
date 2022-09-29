@@ -1,6 +1,9 @@
 package subchan
 
-import "time"
+import (
+	"time"
+	"ytChan/util/prettylog"
+)
 
 func (d *SubChan) subChanCleanDaemon() {
 	for {
@@ -9,13 +12,23 @@ func (d *SubChan) subChanCleanDaemon() {
 			return
 		default:
 			d.cleanFlag.Clean()
-			l := len(d.sendHistory.h)
-			tmp := make([]interface{}, l)
-			copy(tmp, d.sendHistory.h)
-			d.sendHistory.h = tmp
+			count := len(d.sendHistory.h)
+			if count < 1024 {
+				prettylog.Infof("no need to clean history")
+			} else if count < 8192 {
+				tmp := make([]interface{}, count)
+				copy(tmp, d.sendHistory.h[count/4:])
+				d.sendHistory.h = tmp
+				prettylog.Infof("clean complete: %s", count)
+			} else {
+				tmp := make([]interface{}, count)
+				copy(tmp, d.sendHistory.h[count/2:])
+				d.sendHistory.h = tmp
+				prettylog.Infof("clean complete: %s", count)
+			}
 			d.cleanFlag.Done()
 
-			time.Sleep(30 * time.Second)
+			time.Sleep(3 * time.Second)
 		}
 	}
 }
