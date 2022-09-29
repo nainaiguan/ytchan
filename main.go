@@ -20,7 +20,7 @@ func main() {
 	}()
 
 	cond := sync.NewCond(&sync.Mutex{})
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 1024; i++ {
 		go func(i int) {
 			cond.L.Lock()
 			cond.Wait()
