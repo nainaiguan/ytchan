@@ -5,10 +5,10 @@ import (
 	"ytChan/api/sub"
 )
 
-func Default() (*SubChan, context.CancelFunc) {
+func Default() (*subChan, context.CancelFunc) {
 	ctx, shut := context.WithCancel(context.Background())
 	m := make(map[string]chan interface{})
-	ret := &SubChan{
+	ret := &subChan{
 		data:           make(chan interface{}, 1024),
 		cap:            1024,
 		maxSendProcess: 1024,
@@ -32,10 +32,10 @@ func Default() (*SubChan, context.CancelFunc) {
 	return ret, shut
 }
 
-func New(args sub.NewSubArgs) (*SubChan, context.CancelFunc) {
+func New(args sub.NewSubArgs) (*subChan, context.CancelFunc) {
 	ctx, shut := context.WithCancel(context.Background())
 	m := make(map[string]chan interface{})
-	ret := &SubChan{
+	ret := &subChan{
 		data:           make(chan interface{}, args.Size),
 		cap:            args.Size,
 		maxSendProcess: args.MaxSendProcess,

@@ -5,9 +5,9 @@ import (
 	"ytChan/api/dft"
 )
 
-func Default() (*DftChan, context.CancelFunc) {
+func Default() (*dftChan, context.CancelFunc) {
 	ctx, shut := context.WithCancel(context.Background())
-	ret := &DftChan{
+	ret := &dftChan{
 		data:           make(chan interface{}, 1024),
 		cap:            1024,
 		maxSendProcess: 1024,
@@ -29,9 +29,9 @@ func Default() (*DftChan, context.CancelFunc) {
 	return ret, shut
 }
 
-func New(args dft.NewDftArgs) (*DftChan, context.CancelFunc) {
+func New(args dft.NewDftArgs) (*dftChan, context.CancelFunc) {
 	ctx, shut := context.WithCancel(context.Background())
-	ret := &DftChan{
+	ret := &dftChan{
 		data:           make(chan interface{}, args.Size),
 		cap:            args.Size,
 		maxSendProcess: args.MaxSendProcess,

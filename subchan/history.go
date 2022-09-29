@@ -1,5 +1,5 @@
 package subchan
 
-func (s *SubChan) History() []interface{} {
+func (s *subChan) History() []interface{} {
 	return s.sendHistory.Load()
 }

@@ -2,7 +2,7 @@ package slowchan
 
 import "context"
 
-func (d *SlowChan) Close(cancelFunc context.CancelFunc) {
+func (d *slowChan) Close(cancelFunc context.CancelFunc) {
 	cancelFunc()
 	d.closeFlag.Close()
 

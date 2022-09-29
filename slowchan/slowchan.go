@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type SlowChan struct {
+type slowChan struct {
 	data           chan interface{}
 	cap            int
 	step           time.Duration

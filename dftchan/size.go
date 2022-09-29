@@ -1,9 +1,9 @@
 package dftchan
 
-func (d *DftChan) Size() int {
+func (d *dftChan) Size() int {
 	return len(d.data)
 }
 
-func (d *DftChan) Capacity() int {
+func (d *dftChan) Capacity() int {
 	return d.cap
 }

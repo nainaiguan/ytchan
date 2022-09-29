@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-type DftChan struct {
+type dftChan struct {
 	data           chan interface{}
 	cap            int
 	maxSendProcess int

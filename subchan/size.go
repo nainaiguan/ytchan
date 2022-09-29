@@ -1,9 +1,9 @@
 package subchan
 
-func (d *SubChan) Size() int {
+func (d *subChan) Size() int {
 	return len(d.data)
 }
 
-func (d *SubChan) Capacity() int {
+func (d *subChan) Capacity() int {
 	return d.cap
 }

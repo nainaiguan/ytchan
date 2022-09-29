@@ -5,7 +5,7 @@ import (
 	"ytChan/util/prettylog"
 )
 
-func (d *DftChan) dftChanCleanDaemon() {
+func (d *dftChan) dftChanCleanDaemon() {
 	for {
 		select {
 		case <-d.ctx.Done():

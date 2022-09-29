@@ -1,5 +1,5 @@
 package slowchan
 
-func (d *SlowChan) History() []interface{} {
+func (d *slowChan) History() []interface{} {
 	return d.sendHistory.Load()
 }

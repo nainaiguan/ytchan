@@ -1,5 +1,5 @@
 package dftchan
 
-func (d *DftChan) History() []interface{} {
+func (d *dftChan) History() []interface{} {
 	return d.sendHistory.Load()
 }

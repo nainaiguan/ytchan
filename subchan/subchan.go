@@ -6,7 +6,7 @@ import (
 	"ytChan/util/prettylog"
 )
 
-type SubChan struct {
+type subChan struct {
 	data           chan interface{}
 	cap            int
 	maxSendProcess int

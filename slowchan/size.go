@@ -1,9 +1,9 @@
 package slowchan
 
-func (d *SlowChan) Size() int {
+func (d *slowChan) Size() int {
 	return len(d.data)
 }
 
-func (d *SlowChan) Capacity() int {
+func (d *slowChan) Capacity() int {
 	return d.cap
 }

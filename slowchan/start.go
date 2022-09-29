@@ -2,7 +2,7 @@ package slowchan
 
 import "time"
 
-func (s *SlowChan) Start(bufsize int) chan interface{} {
+func (s *slowChan) Start(bufsize int) chan interface{} {
 	c := make(chan interface{}, bufsize)
 	go func() {
 		for {

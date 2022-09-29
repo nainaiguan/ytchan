@@ -6,9 +6,9 @@ import (
 	"ytChan/api/slow"
 )
 
-func Default() (*SlowChan, context.CancelFunc) {
+func Default() (*slowChan, context.CancelFunc) {
 	ctx, shut := context.WithCancel(context.Background())
-	ret := &SlowChan{
+	ret := &slowChan{
 		data:           make(chan interface{}, 1024),
 		cap:            1024,
 		step:           1 * time.Second,
@@ -29,9 +29,9 @@ func Default() (*SlowChan, context.CancelFunc) {
 	return ret, shut
 }
 
-func New(args slow.NewSlowArgs) (*SlowChan, context.CancelFunc) {
+func New(args slow.NewSlowArgs) (*slowChan, context.CancelFunc) {
 	ctx, shut := context.WithCancel(context.Background())
-	ret := &SlowChan{
+	ret := &slowChan{
 		data:           make(chan interface{}, args.Size),
 		cap:            args.Size,
 		step:           args.Step,

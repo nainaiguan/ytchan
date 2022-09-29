@@ -5,16 +5,16 @@ import (
 	"ytChan/util/prettylog"
 )
 
-func (d *SlowChan) Send(message interface{}) error {
+func (d *slowChan) Send(message interface{}) error {
 	if d.closeFlag.Load() == 1 {
 		err := errors.New("the chan is already closed")
-		prettylog.Errorf("SubChan.Send Error, err: %s", err)
+		prettylog.Errorf("slowChan.Send Error, err: %s", err)
 		return err
 	}
 
 	if d.maxSendProcess <= d.sendProcess.Load() {
 		err := errors.New("too much sendProcess")
-		prettylog.Errorf("SubChan.Send Error, err: %s", err)
+		prettylog.Errorf("slowChan.Send Error, err: %s", err)
 		return err
 	}
 

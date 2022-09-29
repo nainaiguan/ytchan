@@ -2,7 +2,7 @@ package subchan
 
 import "context"
 
-func (s *SubChan) Close(cancelFunc context.CancelFunc) {
+func (s *subChan) Close(cancelFunc context.CancelFunc) {
 	cancelFunc()
 
 	s.closeFlag.Close()

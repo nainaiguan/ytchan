@@ -1,5 +1,5 @@
 package subchan
 
-func (s *SubChan) Unsubscribe(name string) {
+func (s *subChan) Unsubscribe(name string) {
 	s.subscriber.Drop(name)
 }

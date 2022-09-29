@@ -5,7 +5,7 @@ import (
 	"ytChan/util/prettylog"
 )
 
-func (d *SubChan) subChanCleanDaemon() {
+func (d *subChan) subChanCleanDaemon() {
 	for {
 		select {
 		case <-d.ctx.Done():

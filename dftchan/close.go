@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-func (d *DftChan) Close(cancelFunc context.CancelFunc) {
+func (d *dftChan) Close(cancelFunc context.CancelFunc) {
 	cancelFunc()
 	d.closeFlag.Close()
 
