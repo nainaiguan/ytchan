@@ -19,12 +19,12 @@ func (d *DftChan) dftChanCleanDaemon() {
 				tmp := make([]interface{}, count)
 				copy(tmp, d.sendHistory.h[count/4:])
 				d.sendHistory.h = tmp
-				prettylog.Infof("clean complete: %s", count)
+				prettylog.Infof("clean complete: %d", count)
 			} else {
 				tmp := make([]interface{}, count)
 				copy(tmp, d.sendHistory.h[count/2:])
 				d.sendHistory.h = tmp
-				prettylog.Infof("clean complete: %s", count)
+				prettylog.Infof("clean complete: %d", count)
 			}
 			d.cleanFlag.Done()
 
