@@ -13,7 +13,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/ytChan/dftchan"
+	"github.com/nainaiguan/ytChan/dftchan"
 )
 
 func main() {
@@ -42,7 +42,7 @@ package main
 import (
 	"fmt"
 	"sync"
-	"ytChan/subchan"
+	"github.com/nainaiguan/ytChan/dftchan"
 )
 
 func main() {
@@ -81,7 +81,7 @@ package main
 import (
 	"fmt"
 	"time"
-	"ytChan/slowchan"
+	"github.com/nainaiguan/ytChan/dftchan"
 )
 
 func main() {
