@@ -9,13 +9,6 @@ In theory, the maximum concurrency you set must be within the tolerance of the o
 
 - ### dftchan
 ```
-package main
-
-import (
-	"fmt"
-	"github.com/nainaiguan/ytChan/dftchan"
-)
-
 func main() {
     ch, shut := dftchan.Default()
 
@@ -37,14 +30,6 @@ func main() {
 - ### subchan
 Support subscription function, each message will be pushed to all subscribed users.
 ```
-package main
-
-import (
-	"fmt"
-	"sync"
-	"github.com/nainaiguan/ytChan/dftchan"
-)
-
 func main() {
 	ch, shut := subchan.Default()
 	
@@ -76,14 +61,6 @@ func main() {
 - ### slowchan
 Support buffering function, users can set the message push interval by themselves.
 ```
-package main
-
-import (
-	"fmt"
-	"time"
-	"github.com/nainaiguan/ytChan/dftchan"
-)
-
 func main() {
     ch, shut := slowchan.Default()
 	ch.Send(1)
