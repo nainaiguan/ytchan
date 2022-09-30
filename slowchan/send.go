@@ -2,7 +2,7 @@ package slowchan
 
 import (
 	"errors"
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 func (d *slowChan) Send(message interface{}) error {

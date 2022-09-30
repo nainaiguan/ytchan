@@ -3,7 +3,7 @@ package subchan
 import (
 	"context"
 	"sync"
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 type subChan struct {

@@ -2,7 +2,7 @@ package subchan
 
 import (
 	"context"
-	"ytChan/api/sub"
+	"ytchan/api/sub"
 )
 
 func Default() (*subChan, context.CancelFunc) {

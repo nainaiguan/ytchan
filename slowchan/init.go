@@ -3,7 +3,7 @@ package slowchan
 import (
 	"context"
 	"time"
-	"ytChan/api/slow"
+	"ytchan/api/slow"
 )
 
 func Default() (*slowChan, context.CancelFunc) {

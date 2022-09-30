@@ -2,7 +2,7 @@ package slowchan
 
 import (
 	"time"
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 func (d *slowChan) slowChanCleanDaemon() {

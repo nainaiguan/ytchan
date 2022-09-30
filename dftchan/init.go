@@ -2,7 +2,7 @@ package dftchan
 
 import (
 	"context"
-	"ytChan/api/dft"
+	"ytchan/api/dft"
 )
 
 func Default() (*dftChan, context.CancelFunc) {

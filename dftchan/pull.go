@@ -1,7 +1,7 @@
 package dftchan
 
 import (
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 func (d *dftChan) Pull(size int) []interface{} {

@@ -2,7 +2,7 @@ package dftchan
 
 import (
 	"errors"
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 func (d *dftChan) Send(message interface{}) error {

@@ -2,7 +2,7 @@ package subchan
 
 import (
 	"time"
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 func (d *subChan) subChanCleanDaemon() {

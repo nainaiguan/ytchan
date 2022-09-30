@@ -2,7 +2,7 @@ package subchan
 
 import (
 	"errors"
-	"ytChan/util/prettylog"
+	"ytchan/util/prettylog"
 )
 
 func (d *subChan) Send(message interface{}) error {

@@ -1,1 +1,3 @@
-module github.com/nainaiguan/ytchan
+module ytchan
+
+go 1.17
