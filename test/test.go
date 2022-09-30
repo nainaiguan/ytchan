@@ -8,7 +8,7 @@ import (
 func test() {
 	ch, shut := dftchan.Default()
 	for i := 0; i < 100; i++ {
-		ch.Send("dhiahgurhwaigjhfdsakufgdysuakgbfruwyakbvykuafb")
+		ch.Send(i)
 	}
 
 	fmt.Println(ch.History())
