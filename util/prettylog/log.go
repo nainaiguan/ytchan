@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type niceLog struct {
+type logBody struct {
 	kind   string
 	time   string
 	detail string
@@ -14,7 +14,7 @@ type niceLog struct {
 func Errorf(template string, args ...interface{}) {
 	t := time.Now()
 	s := fmt.Sprintf(template, args...)
-	n := niceLog{
+	n := logBody{
 		kind:   "ERROR",
 		time:   t.Format("2006-01-04 15:04:15"),
 		detail: s,
@@ -25,7 +25,7 @@ func Errorf(template string, args ...interface{}) {
 func Infof(template string, args ...interface{}) {
 	t := time.Now()
 	s := fmt.Sprintf(template, args...)
-	n := niceLog{
+	n := logBody{
 		kind:   "INFO",
 		time:   t.Format("2006-01-04 15:04:15"),
 		detail: s,

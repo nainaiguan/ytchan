@@ -12,7 +12,7 @@ func (d *dftChan) dftChanCleanDaemon() {
 			return
 		default:
 			d.cleanFlag.Clean()
-			count := len(d.sendHistory.h)
+			count := d.sendHistory.Len()
 			if count < 1024 {
 				prettylog.Infof("no need to clean history")
 			} else if count < 8192 {

@@ -113,3 +113,9 @@ func (h *history) Add(message interface{}) {
 	h.h = append(h.h, message)
 	h.m.Unlock()
 }
+
+func (h *history) Len() int {
+	h.m.RLock()
+	defer h.m.RUnlock()
+	return len(h.h)
+}

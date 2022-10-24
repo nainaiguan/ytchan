@@ -12,8 +12,9 @@ func test() {
 		Size:           10000,
 		MaxSendProcess: 100,
 	})
-	for i := 0; i < 2000; i++ {
-		ch.Send(i)
+	for i := 0; i < 1500; i++ {
+		go ch.History()
+		go ch.Send(i)
 	}
 
 	fmt.Println(ch.History())
