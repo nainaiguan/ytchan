@@ -16,12 +16,12 @@ func (d *dftChan) dftChanCleanDaemon() {
 			if count < 1024 {
 				prettylog.Infof("no need to clean history")
 			} else if count < 8192 {
-				tmp := make([]interface{}, count)
+				tmp := make([]interface{}, count/4)
 				copy(tmp, d.sendHistory.h[count/4:])
 				d.sendHistory.h = tmp
 				prettylog.Infof("clean complete: %d", count)
 			} else {
-				tmp := make([]interface{}, count)
+				tmp := make([]interface{}, count/2)
 				copy(tmp, d.sendHistory.h[count/2:])
 				d.sendHistory.h = tmp
 				prettylog.Infof("clean complete: %d", count)
